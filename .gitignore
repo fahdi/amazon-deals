@@ -1,0 +1,11 @@
+node_modules/
+dashboard/bower_components/
+.vscode/
+config/*.json
+npm-debug.log
+.DS_Store
+script/data
+*.rdb
+.idea
+uploads/*
+downloads/*
