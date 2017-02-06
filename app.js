@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
+const kue = require('kue');
+const kueUI = require('kue-ui');
+
 var app = express();
 
 // view engine setup
@@ -24,6 +27,15 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+
+kueUI.setup({
+  apiURL: '/api',
+  baseURL: '/queue',
+  updateInterval: 5000
+});
+
+app.use('/api', kue.app);
+app.use('/queue', kueUI.app);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
